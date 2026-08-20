@@ -1,0 +1,24 @@
+# What a consumer receives from `composer require`.
+#
+# Everything below is part of developing this package and no part of using it,
+# so it stays out of the dist archive. Verify with:
+#
+#     git archive --format=tar HEAD | tar -t
+#
+# `provider/` is deliberately NOT export-ignored, and that is not an
+# oversight. It is autoloaded as production code (PSR-4, not autoload-dev)
+# precisely so an adapter package can `composer require` this one and extend
+# its abstract contract test cases. Export-ignoring it would break every
+# downstream adapter's test suite, and the failure would look like a Composer
+# problem rather than a packaging decision.
+/tests              export-ignore
+/tools              export-ignore
+/.github            export-ignore
+/build              export-ignore
+/phpunit.xml        export-ignore
+/phpstan.neon       export-ignore
+/php_cs.dist.php    export-ignore
+/phptoolsconfig.json export-ignore
+/Dockerfile         export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore

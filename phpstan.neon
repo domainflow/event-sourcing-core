@@ -1,0 +1,23 @@
+parameters:
+    level: 10
+    paths:
+        - src
+        - provider
+    treatPhpDocTypesAsCertain: false
+    ignoreErrors:
+        -
+            # The contract still has to hold adapters to retrievePaginatedEvents()'
+            # behaviour for as long as the method ships. Deprecating it says "do not
+            # build on this"; it does not say "stop testing it".
+            identifier: method.deprecated
+            path: provider/Unit/AbstractEventStorageTestCase.php
+        -
+            # Public consumer-facing trait: intentionally provides default
+            # SnapshotableAggregateInterface method implementations for downstream
+            # aggregates to `use`, so it has no consumer inside src/ itself.
+            identifier: trait.unused
+            path: src/EventSourcing/Trait/SnapshotableAggregateTrait.php
+
+includes:
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
